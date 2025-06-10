@@ -3,8 +3,7 @@
 import { Pokemon } from '@/utils/types';
 import { useState, useEffect } from 'react';
 import { PokemonList } from './pokemon-list';
-import SearchInput from './search-input';
-import { getPokemonData } from '@/app/page';
+import { getPokemonData } from '@/app/utils/pokemon';
 
 interface PokemonWrapperProps {
   pokemons: number;
@@ -24,7 +23,7 @@ export default function PokemonWrapper({ pokemons: initialNumber }: PokemonWrapp
     });
   }, [currentNumber]);
 
-  const handleSearch = (search: string) => {
+  const handleSearch = () => {
     const filtered = pokemonList.filter((pokemon) => {
       const matchesName = pokemon.name.toLowerCase().includes(nameSearch.toLowerCase());
       const matchesId = pokemon.id.toString().includes(idSearch);
@@ -42,7 +41,7 @@ export default function PokemonWrapper({ pokemons: initialNumber }: PokemonWrapp
   };
 
   useEffect(() => {
-    handleSearch('');
+    handleSearch();
   }, [nameSearch, idSearch]);
 
   return (
